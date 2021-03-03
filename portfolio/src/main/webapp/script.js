@@ -36,3 +36,18 @@ async function showSomething(){
     servletContainer.innerText = textFromResponse;
 }
 
+async function getServerStats(){
+    //fetch function that will get info from /hello
+    const serverResponse = await fetch('/my-data-url');
+
+    //parsing to json
+    const info = await serverResponse.json();
+    const infoList = document.getElementById('hello-container');
+  infoList.innerHTML = '';
+
+    infoList.appendChild(
+        createListElement('Hello: ' + infoList)
+    )
+
+}
+
