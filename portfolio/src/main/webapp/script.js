@@ -38,16 +38,14 @@ async function showSomething(){
 
 async function getServerStats(){
     //fetch function that will get info from /hello
-    const serverResponse = await fetch('/my-data-url');
-
+    const serverResponse = await fetch('/hello');
     //parsing to json
     const info = await serverResponse.json();
-    const infoList = document.getElementById('hello-container');
-  infoList.innerHTML = '';
 
-    infoList.appendChild(
-        createListElement('Hello: ' + infoList)
-    )
+    //retrieving messages from arraylist: not working
+    console.log(info);
+    //console.log("info.get(1)");
+    //console.log("info.get(2)");
 
 }
 
