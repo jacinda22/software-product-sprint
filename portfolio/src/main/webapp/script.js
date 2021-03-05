@@ -32,18 +32,27 @@ async function showSomething(){
     const responseFromServer = await fetch('/hello');
     const textFromResponse = await responseFromServer.text();
 
-    const servletContainer = document.getElementById('servlet-container');
+    const servletContainer = document.getElementById('servlet1-container');
     servletContainer.innerText = textFromResponse;
 }
 
-async function getServerStats(){
+async function getRandomThoughts(){
     //fetch function that will get info from /hello
     const serverResponse = await fetch('/hello');
-    //parsing to json
-    const info = await serverResponse.json();
 
-    //retrieving messages from arraylist: not working
-    console.log(info);
+    //parsing to json
+    const ranInfo = await serverResponse.json();
+    //gets a random element w/Math.random(): Error w/ranInfo.length in web console
+    const ranElement = ranInfo[Math.floor(Math.random()*ranInfo.length)];  
+
+    //connecting with index.html to print array of random info
+    const servletContainer = document.getElementById('servlet2-container');
+    servletContainer.innerText = ranElement;
+    //testing what will print to the web console w/ ranInfo.length: prints string instead of int
+    console.log(ranInfo[Math.floor(Math.random()*ranInfo.length)]);
+    
+    //printing random message in the website console
+    console.log([Math.floor(Math.random()*ranInfo.length())]);
     //console.log("info.get(1)");
     //console.log("info.get(2)");
 
