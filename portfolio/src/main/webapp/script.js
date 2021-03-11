@@ -17,7 +17,7 @@
  */
 function addRandomGreeting() {
   const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+      ['My favorite color is purple.', 'I am Hispanic but can not speak Spanish. ', '🥳 I was born in June!', 'My most used emojis: 🥰🥺😈❤️'];
 
   // Pick a random greeting.
   const greeting = greetings[Math.floor(Math.random() * greetings.length)];
@@ -26,3 +26,26 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+//function for servlets
+async function showSomething(){
+    const responseFromServer = await fetch('/hello');
+    const textFromResponse = await responseFromServer.text();
+
+    const servletContainer = document.getElementById('servlet-container');
+    servletContainer.innerText = textFromResponse;
+}
+
+async function getServerStats(){
+    //fetch function that will get info from /hello
+    const serverResponse = await fetch('/hello');
+    //parsing to json
+    const info = await serverResponse.json();
+
+    //retrieving messages from arraylist: not working
+    console.log(info);
+    //console.log("info.get(1)");
+    //console.log("info.get(2)");
+
+}
+
