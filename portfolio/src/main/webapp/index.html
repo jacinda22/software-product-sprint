@@ -10,11 +10,11 @@
     <div id="content">
       <h1>Jacinda's Portfolio</h1>
       <p>Welcome to my portfolio.</p>
-      <img src = "/images/tenor.gif" />
-      <button onclick = "showSomething();">
+     <img src = "/images/tenor.gif" /> 
+      <button onclick = "getRandomThoughts();">
         Click here for a surprise! :)
     </button>
-    <p id="servlet-container"></p>
+    <p id="servlet2-container"></p>
     
       <p>Hi everyone! My full name is Jacinda Ryzel Soto. Right now you are visiting
         my portfolio page which is kinda cool. I like to code (if that wasn't obvious), read,
@@ -29,6 +29,30 @@
       <p>Click below to get random fun facts about me.</p>
       <button onclick="addRandomGreeting()"> ☺️</button>
       <div id="greeting-container"></div>
+
+      <form action="/form-handler" method="POST">
+
+        <p>Choose contact information you want to receive:</p>
+      <label>
+        <input type="checkbox" name="contact-email" value="true">
+        Email
+      </label>
+       <label>
+        <input type="checkbox" name="contact-phone" value="true">
+        Phone Number
+      </label>
+      <label>
+        <input type="checkbox" name="contact-git" value="true">
+        Github
+      </label>
+
+        <p>Enter your email here:</p>
+        <textarea name="text-input">hello world</textarea>
+        <br/>
+        <input type="submit" />
+        </form>
     </div>
+
+    
   </body>
 </html>
