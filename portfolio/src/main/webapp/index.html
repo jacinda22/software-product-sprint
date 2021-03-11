@@ -14,6 +14,30 @@
       <p>Click here to get a random message:</p>
       <button onclick="addRandomGreeting()">Hello</button>
       <div id="greeting-container"></div>
+
+      <form action="/form-handler" method="POST">
+
+        <p>Choose contact information you want to receive:</p>
+      <label>
+        <input type="checkbox" name="contact-email" value="true">
+        Email
+      </label>
+       <label>
+        <input type="checkbox" name="contact-phone" value="true">
+        Phone Number
+      </label>
+      <label>
+        <input type="checkbox" name="contact-git" value="true">
+        Github
+      </label>
+
+        <p>Enter your Information here:</p>
+        <textarea name="name">Enter name:</textarea>
+        <textarea name="email">Enter email:</textarea>
+        <textarea name="reason">Enter reason of contact:</textarea>
+        <br/>
+        <input type="submit" />
+        </form>
     </div>
   </body>
 </html>
