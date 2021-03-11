@@ -42,19 +42,10 @@ async function getRandomThoughts(){
 
     //parsing to json
     const ranInfo = await serverResponse.json();
-    //gets a random element w/Math.random(): Error w/ranInfo.length in web console
+    //gets a random element w/Math.random()
     const ranElement = ranInfo[Math.floor(Math.random()*ranInfo.length)];  
 
     //connecting with index.html to print array of random info
     const servletContainer = document.getElementById('servlet2-container');
     servletContainer.innerText = ranElement;
-    //testing what will print to the web console w/ ranInfo.length: prints string instead of int
-    console.log(ranInfo[Math.floor(Math.random()*ranInfo.length)]);
-    
-    //printing random message in the website console
-    console.log([Math.floor(Math.random()*ranInfo.length())]);
-    //console.log("info.get(1)");
-    //console.log("info.get(2)");
-
 }
-

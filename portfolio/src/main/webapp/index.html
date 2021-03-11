@@ -10,7 +10,7 @@
     <div id="content">
       <h1>Jacinda's Portfolio</h1>
       <p>Welcome to my portfolio.</p>
-      <img src = "/images/tenor.gif" />
+     <!-- <img src = "/images/tenor.gif" /> -->
       <button onclick = "getRandomThoughts();">
         Click here for a surprise! :)
     </button>
@@ -24,5 +24,14 @@
       <button onclick="addRandomGreeting()">Hello</button>
       <div id="greeting-container"></div>
     </div>
+    
+    <form action="/form-handler" method="POST">
+    <p>Enter some text here:</p>
+    <textarea name="text-input">hello world</textarea>
+    <br/>
+    <input type="submit" />
+    </form>
+
+    
   </body>
 </html>
