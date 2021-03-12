@@ -12,6 +12,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.cloud.datastore.Query;
+import com.google.cloud.datastore.QueryResults;
+import com.google.cloud.datastore.StructuredQuery.OrderBy;
+import com.google.gson.Gson;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @WebServlet("/form-handler")
@@ -44,11 +50,10 @@ public class FormHandlerServlet extends HttpServlet {
     //response.getWriter().println("You are now being redirected to the main page");
     //response.sendRedirect("http://www.jsoto-sps-spring21.appspot.com/");
 
-    //Testing out datastore 
     String name = Jsoup.clean(request.getParameter("name"), Whitelist.none());
     String email = Jsoup.clean(request.getParameter("email"), Whitelist.none());
     String reason = Jsoup.clean(request.getParameter("reason"), Whitelist.none());
-    long timestamp = System.currentTimeMillis();
+    long timestamp1 = System.currentTimeMillis();
     
     Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
     KeyFactory keyFactory = datastore.newKeyFactory().setKind("Task");
@@ -56,26 +61,47 @@ public class FormHandlerServlet extends HttpServlet {
     FullEntity taskEntity1 =
     Entity.newBuilder(keyFactory.newKey())
         .set("name", name)
-        .set("timestamp", timestamp)
+        .set("timestamp", timestamp1)
         .build();
     datastore.put(taskEntity1);
 
     FullEntity taskEntity2 =
     Entity.newBuilder(keyFactory.newKey())
         .set("email", email)
-        .set("timestamp", timestamp)
+        .set("timestamp", timestamp1)
         .build();
     datastore.put(taskEntity2);
 
     FullEntity taskEntity3 =
     Entity.newBuilder(keyFactory.newKey())
         .set("reason", reason)
-        .set("timestamp", timestamp)
+        .set("timestamp", timestamp1)
         .build();
     datastore.put(taskEntity3);
-        
-  }
 
+    Query<Entity> query = 
+        Query.newEntityQueryBuilder().setKind("Recom").setOrderBy(OrderBy.desc("timestamp")).build();
+    QueryResults<Entity> results = datastore.run(query);
+
+    ArrayList<String> recommendation = new ArrayList<String>();
+    while (results.hasNext()) {
+        Entity entity = results.next();
+        
+        //long id = entity.getKey().getId();
+        String msg1 = entity.getString("msg1");
+        //long timestamp2 = entity.getLong("timestamp2");
+
+        recommendation.add(msg1);
+    }
+
+    Gson gson = new Gson();
+
+    response.setContentType("application/json;");
+    response.getWriter().println(gson.toJson(recommendation));  
+       
+    }
+
+    
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
     if (value == null) {

@@ -32,20 +32,43 @@ async function showSomething(){
     const responseFromServer = await fetch('/hello');
     const textFromResponse = await responseFromServer.text();
 
-    const servletContainer = document.getElementById('servlet-container');
+    const servletContainer = document.getElementById('servlet1-container');
     servletContainer.innerText = textFromResponse;
 }
 
-async function getServerStats(){
+async function getRandomThoughts(){
     //fetch function that will get info from /hello
     const serverResponse = await fetch('/hello');
-    //parsing to json
-    const info = await serverResponse.json();
 
-    //retrieving messages from arraylist: not working
-    console.log(info);
-    //console.log("info.get(1)");
-    //console.log("info.get(2)");
+    //parsing to json
+    const ranInfo = await serverResponse.json();
+    //gets a random element w/Math.random()
+    const ranElement = ranInfo[Math.floor(Math.random()*ranInfo.length)];  
+
+    //connecting with index.html to print array of random info
+    const servletContainer = document.getElementById('servlet2-container');
+    servletContainer.innerText = ranElement;
+}
+
+function loadRecoms(){
+    fetch('/form-handler').then(response => response.json()).then((recommendation) => {
+    const recomListElement = document.getElementById('/form-handler');
+    recommendation.forEach((recommendation) => {
+      recomListElement.appendChild(createRecomElement(recommendation));
+    })
+  });
+}
+
+function createRecomElement(recommendation){
+    const recomElement = document.createTaskElement(recommendation);
+    recomElement.className = 'recom';
+
+    const titleElement = document.createElement('title-element');
+    titleElement.innerText = recommendation.title;
+
+    recomElement.appendChild(titleElement);
+    return recomElement;
 
 }
+
 
